@@ -4,9 +4,9 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite --host --port 80",
+		"dev": "vite --host --port 3000",
 		"build": "tsc && vite build",
-		"preview": "vite preview --host --port 80",
+		"preview": "vite preview --host --port 3000",
 		"start": "npm run build && npm run preview"
 	},
 	"dependencies": {
