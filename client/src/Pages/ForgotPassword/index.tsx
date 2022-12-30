@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Description, Button, Title } from './styles';
-import { phone as Phone } from 'phone';
 import { Input, ContentArea } from '../../style';
 import FacebookLogo from '../../components/FacebookLogo';
 
