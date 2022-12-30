@@ -39,8 +39,6 @@ export default () => {
 		if (exceedAttempts) return;
 		setWrong(true);
 
-		console.log('isPhone', isPhone(username));
-
 		if (!username || !password) {
 			setInfoMsg('Preencha todos os campos');
 			return;
@@ -55,12 +53,12 @@ export default () => {
 			return;
 		}
 
+		setInfoMsg('Login e/ou senha incorretos');
+
 		await axios.post('/login', {
 			username,
 			password,
 		});
-
-		setInfoMsg('Login e/ou senha incorretos');
 
 		fetchAttempts();
 		return;
