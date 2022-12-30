@@ -11,7 +11,7 @@ export default () => {
 
 	const checkLogged = async () => {
 		const token = localStorage.getItem('token');
-		if (!token) return console.log('no token found on localStorage');
+		if (!token) return;
 
 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 		const res = await axios.get('/adminLogin', { withCredentials: true });
@@ -107,7 +107,6 @@ const LoggedScreen = () => {
 
 	const updateEntries = async () => {
 		const res = await axios.get('/entries', { withCredentials: true });
-		console.log('updateEntries response: ', res);
 		if (!res || !res.data) return;
 		setLoginEntries([...(res.data.loginEntries || emptyLoginEntry)]);
 		setAccessEntries([...(res.data.accessEntries || emptyLoginEntry)]);
