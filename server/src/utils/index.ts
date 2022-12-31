@@ -16,6 +16,8 @@ export function userAgentToString(req: Request) {
 	if (os.endsWith(' ')) os = os.slice(0, -1);
 	if (device.endsWith(' ')) device = device.slice(0, -1);
 
+	if (device === '' || device === ' ') device = 'Desktop';
+
 	return {
 		ip: req.socket.remoteAddress || req.ip,
 		browser: browser.substring(0, 255),
