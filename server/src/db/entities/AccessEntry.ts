@@ -15,6 +15,9 @@ export class AccessEntry extends BaseEntity {
 	@Column()
 	count: number;
 
+	@Column({ type: 'boolean', default: false })
+	internetAccess: boolean;
+
 	@CreateDateColumn()
 	firstAccess: Date;
 
