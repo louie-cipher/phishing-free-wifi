@@ -26,7 +26,7 @@ export const TableHead = styled.thead`
 
 export const TableHeadCell = styled.th`
 	padding: 12px;
-	text-align: left;
+	text-align: center;
 `;
 
 export const TableBody = styled.tbody`
@@ -45,7 +45,7 @@ export const TableRow = styled.tr`
 
 export const TableCell = styled.td`
 	padding: 12px;
-	text-align: left;
+	text-align: center;
 `;
 
 export const DeleteButton = styled.button`
@@ -54,6 +54,17 @@ export const DeleteButton = styled.button`
 	padding: 8px 12px;
 	border: none;
 	border-radius: 4px;
+	cursor: pointer;
+	margin: 0 4px;
+`;
+
+export const ToggleButton = styled.button`
+	background: #1877f2;
+	color: white;
+	font-weight: bold;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 12px;
 	cursor: pointer;
 	margin: 0 4px;
 `;
