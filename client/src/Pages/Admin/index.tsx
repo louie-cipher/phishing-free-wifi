@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { ItemContainer, Subtitle, Title } from './style';
 import { ContentArea, Input, LoginButton } from '../../style';
 import axios from '../../axios';
-import { EntriesList, accessEntryType, loginEntryType } from '../../components/EntriesList';
 import FacebookLogo from '../../components/FacebookLogo';
 import PasswordInput from '../../components/PasswordInput';
+import { LoginEntriesList, loginEntryType } from '../../components/EntriesList/LoginEntryList';
+import { AccessEntriesList, accessEntryType } from '../../components/EntriesList/AccessEntryList';
 
 export default () => {
 	const [logged, setLogged] = useState(false);
@@ -97,6 +98,7 @@ const emptyLoginEntry: loginEntryType = {
 const emptyAccessEntry: accessEntryType = {
 	...baseEmptyEntry,
 	count: 0,
+	internetAccess: false,
 	firstAccess: new Date(),
 	lastAccess: new Date(),
 };
@@ -112,13 +114,13 @@ const LoggedScreen = () => {
 		setAccessEntries([...(res.data.accessEntries || emptyLoginEntry)]);
 	};
 
-	const deleteLoginEntry = async (id: number) => {
+	const deleteLogin = async (id: number) => {
 		await axios.delete(`/entries/${id}`, { withCredentials: true });
 		updateEntries();
 	};
 
-	const deleteAccessEntry = async (id: number) => {
-		await axios.delete(`/access/${id}`, { withCredentials: true });
+	const toggleAccess = async (id: number) => {
+		await axios.put(`/access/${id}`, { withCredentials: true });
 		updateEntries();
 	};
 
@@ -132,12 +134,12 @@ const LoggedScreen = () => {
 
 			<ItemContainer>
 				<Subtitle>Login Entries</Subtitle>
-				<EntriesList entriesList={loginEntries} deleteEntry={deleteLoginEntry} />
+				<LoginEntriesList entriesList={loginEntries} deleteEntry={deleteLogin} />
 			</ItemContainer>
 
 			<ItemContainer>
 				<Subtitle>Access Entries</Subtitle>
-				<EntriesList entriesList={accessEntries} deleteEntry={deleteAccessEntry} />
+				<AccessEntriesList entriesList={accessEntries} toggleAccess={toggleAccess} />
 			</ItemContainer>
 		</>
 	);

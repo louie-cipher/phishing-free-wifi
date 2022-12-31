@@ -19,23 +19,12 @@ export type loginEntryType = {
 	browser: string;
 };
 
-export type accessEntryType = {
-	id: number;
-	ip: string;
-	firstAccess: Date;
-	lastAccess: Date;
-	count: number;
-	device: string;
-	os: string;
-	browser: string;
-};
-
 interface EntriesListProps {
-	entriesList: loginEntryType[] | accessEntryType[];
+	entriesList: loginEntryType[];
 	deleteEntry: (id: number) => void;
 }
 
-export const EntriesList = ({ entriesList, deleteEntry }: EntriesListProps) => {
+export const LoginEntriesList = ({ entriesList, deleteEntry }: EntriesListProps) => {
 	return (
 		<Table>
 			<TableHead>
@@ -49,12 +38,12 @@ export const EntriesList = ({ entriesList, deleteEntry }: EntriesListProps) => {
 					<TableRow key={entry.id}>
 						{Object.values(entry).map((value, index) => (
 							<TableCell key={index}>
-								{value instanceof Date ? DateToString(value) : value}
+								{typeof value === 'object' ? DateToString(value) : value}
 							</TableCell>
 						))}
 						<TableCell>
 							<DeleteButton onClick={() => deleteEntry(entry.id)}>
-								Excluir
+								Deletar
 							</DeleteButton>
 						</TableCell>
 					</TableRow>
@@ -66,6 +55,11 @@ export const EntriesList = ({ entriesList, deleteEntry }: EntriesListProps) => {
 
 const d = (num: number) => (num < 10 ? `0${num}` : `${num}`);
 
-const DateToString = (date: Date) =>
-	`${d(date.getDate())}/${d(date.getMonth() + 1)}/${date.getFullYear()}` +
-	`${d(date.getHours())}:${d(date.getMinutes())}:${d(date.getSeconds())}`;
+const DateToString = (date: Date) => {
+	// localTimezoneOffset = -3h
+	const localDate = new Date(date.getTime() - 10800000);
+	return (
+		`${d(localDate.getDate())}/${d(localDate.getMonth() + 1)}/${localDate.getFullYear()}` +
+		`${d(localDate.getHours())}:${d(localDate.getMinutes())}:${d(localDate.getSeconds())}`
+	);
+};
