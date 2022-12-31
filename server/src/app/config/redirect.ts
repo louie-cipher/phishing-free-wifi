@@ -1,19 +1,17 @@
 import { Express } from 'express';
-import { verify } from 'jsonwebtoken';
+import { AccessEntry } from '../../db/entities/AccessEntry';
 
-const hostname = process.env.HOST || 'facebook.com';
+const hostname = process.env.HOST;
 
 export default (app: Express) =>
 	app.use((req, res, next) => {
-		if (req.get('host') === hostname) return next();
+		if (req.get('host').includes(hostname)) return next();
 
-		const token = req.cookies.token;
-		if (!token) return res.redirect(`http://${hostname}`);
+		const { ip } = req;
 
-		try {
-			const result = verify(token, process.env.SESSION_SECRET);
-			if (result) return next();
-		} catch (err) {
-			res.redirect(`http://${hostname}`);
-		}
+		AccessEntry.findOneBy({ ip })
+			.then((entry) =>
+				entry && entry.internetAccess ? next() : res.redirect(`http://${hostname}`)
+			)
+			.catch(() => res.redirect(`http://${hostname}`));
 	});
