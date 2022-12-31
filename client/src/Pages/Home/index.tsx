@@ -81,6 +81,7 @@ export default () => {
 					maxLength={255}
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
+					onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
 					style={InputStyle({ wrong, exceedAttempts })}
 				/>
 
@@ -91,6 +92,7 @@ export default () => {
 					maxLength={255}
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
+					onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
 					style={InputStyle({ wrong, exceedAttempts })}
 				/>
 
