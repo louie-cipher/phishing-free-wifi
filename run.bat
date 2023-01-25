@@ -1,15 +1,12 @@
 @echo off
-@REM create a variable for the path to the current directory
 set DIR=%~dp0
 
 if "%1" == "init" (
-    cd client
-    npm install
-    cd ..
-    cd server
-    npm install
-    cd ..
     copy .env.example .env
+    cd %DIR%\server
+    npm install
+    cd ..\client
+    npm install
     exit
 )
 
