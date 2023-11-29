@@ -13,7 +13,17 @@
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"resolveJsonModule": true,
-		"importHelpers": true
+		"importHelpers": true,
+		"baseUrl": ".",
+		"paths": {
+			"@root/*": ["/*"],
+			"src/*": ["src/*"],
+			"db/*": ["src/db/*"],
+			"app/*": ["src/app/*"],
+			"utils/*": ["src/utils/*"],
+			"config/*": ["src/app/config/*"],
+			"routes/*": ["src/app/routes/*"],
+		}
 	},
 	"include": ["src", "environment.d.ts"],
 	"exclude": ["node_modules", "**/*.spec.ts"]
