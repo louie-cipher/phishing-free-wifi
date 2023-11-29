@@ -12,14 +12,24 @@ function App() {
 		<Container>
 			<BrowserRouter>
 				<Routes>
-					<Route path='/' element={<PageTitle page={<Home />} title='WiFi Check-in' />} />
+					<Route
+						path='/'
+						element={<PageTitle page={<Home />} title='WiFi Check-in' />}
+					/>
 					<Route
 						path='/administrator'
-						element={<PageTitle page={<Admin />} title='Administrator panel' />}
+						element={
+							<PageTitle page={<Admin />} title='Administrator panel' />
+						}
 					/>
 					<Route
 						path='/forgot-password'
-						element={<PageTitle page={<ForgotPassword />} title='Forgot Password' />}
+						element={
+							<PageTitle
+								page={<ForgotPassword />}
+								title='Forgot Password'
+							/>
+						}
 					/>
 					<Route
 						path='/*'
@@ -33,7 +43,7 @@ function App() {
 				<FooterLink>Mais</FooterLink>
 				<br />
 			</Footer>
-			<FooterLink>Meta © 2022</FooterLink>
+			<FooterLink>Meta © {new Date().getFullYear()}</FooterLink>
 		</Container>
 	);
 }
