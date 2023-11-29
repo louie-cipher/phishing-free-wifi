@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import UAParser from 'ua-parser-js';
 
-export function userAgentToString(req: Request) {
+export default (req: Request) => {
 	const parser = UAParser(req.headers['user-agent']);
 
 	let browser = '';
