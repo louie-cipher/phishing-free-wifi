@@ -1,9 +1,9 @@
 import routes from '..';
-import { AccessEntry } from '../../../db/entities/AccessEntry';
-import { userAgentToString } from '../../../utils';
+import { AccessEntry } from 'db/entities/AccessEntry';
+import userAgent from 'utils/userAgent';
 
 routes.post('/access', async (req, res) => {
-	const { ip, browser, os, device } = userAgentToString(req);
+	const { ip, browser, os, device } = userAgent(req);
 
 	let entry = await AccessEntry.findOneBy({ ip });
 

@@ -1,6 +1,6 @@
 import { gray, blue, red } from 'chalk';
 import { Request, Response } from 'express';
-import { userAgentToString } from '.';
+import userAgent from './userAgent';
 
 const d = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
@@ -16,7 +16,7 @@ export const consoleError = (origin: string, ...args: any[]) =>
 	console.log(gray(dateToString()), red(`[${origin}]`), ...args, '\n', '-'.repeat(80));
 
 export function unauthorizedLog(req: Request, res: Response): void {
-	const { ip, os, device } = userAgentToString(req);
+	const { ip, os, device } = userAgent(req);
 
 	consoleError('BYPASS_ATTEMPT', `Bypass attempt from ${ip} (${os} - ${device})`);
 	res.sendStatus(401);

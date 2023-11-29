@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { Admin } from '../entities/Admin';
 import { db } from '..';
-import { consoleLog } from '../../utils/log';
+import { consoleLog } from 'utils/log';
 
 class AdminRepository extends Repository<Admin> {
 	constructor() {

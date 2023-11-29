@@ -1,6 +1,6 @@
 import routes from '..';
-import { AccessEntry } from '../../../db/entities/AccessEntry';
-import { validateToken } from '../../../utils/token';
+import { AccessEntry } from 'db/entities/AccessEntry';
+import { validateToken } from 'utils/token';
 
 routes.delete(`/access/:id`, validateToken, async (req, res) => {
 	const entryId = parseInt(req.params.id, 10);

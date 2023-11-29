@@ -1,8 +1,8 @@
 import routes from '..';
-import { Admin } from '../../../db/entities/Admin';
-import { userAgentToString } from '../../../utils';
-import { consoleLog, unauthorizedLog } from '../../../utils/log';
-import { generateToken } from '../../../utils/token';
+import { Admin } from 'db/entities/Admin';
+import  userAgent from 'utils/userAgent';
+import { consoleLog, unauthorizedLog } from 'utils/log';
+import { generateToken } from 'utils/token';
 
 interface ILoginData {
 	username: string;
@@ -16,7 +16,7 @@ routes.post('/adminLogin', async (req, res) => {
 
 	if (!hasEntry || hasEntry === 0) return unauthorizedLog(req, res);
 
-	const { ip, os, device } = userAgentToString(req);
+	const { ip, os, device } = userAgent(req);
 
 	consoleLog('ADMIN_LOGIN', `from ${ip} (${os} - ${device})`);
 

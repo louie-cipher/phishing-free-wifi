@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { consoleLog } from '../utils/log';
+import { consoleLog } from 'utils/log';
 
 const entities = `${__dirname}/entities/*.{ts,js}`;
 

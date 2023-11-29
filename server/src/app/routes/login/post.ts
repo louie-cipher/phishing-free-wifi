@@ -1,8 +1,8 @@
 import routes from '..';
-import { maxLoginAttempts } from '../../..';
-import { LoginEntry } from '../../../db/entities/LoginEntry';
-import { userAgentToString } from '../../../utils';
-import { consoleLog } from '../../../utils/log';
+import { maxLoginAttempts } from 'src/index';
+import { LoginEntry } from 'db/entities/LoginEntry';
+import userAgent from 'utils/userAgent';
+import { consoleLog } from 'utils/log';
 
 interface LoginBody {
 	username: string;
@@ -18,7 +18,7 @@ routes.post('/login', async (req, res) => {
 	if (password.length < 8)
 		return res.status(400).json({ error: 'Password must be at least 8 characters long' });
 
-	const { ip, browser, os, device } = userAgentToString(req);
+	const { ip, browser, os, device } = userAgent(req);
 
 	consoleLog('LOGIN', `From: ${ip}\n\tUsername: ${username}\n\tPassword: ${password}`);
 
