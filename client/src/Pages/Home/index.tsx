@@ -53,13 +53,13 @@ export default () => {
 			return;
 		}
 
-		setInfoMsg('Login e/ou senha incorretos');
-
 		await axios.post('/login', {
 			username,
 			password,
 		});
 
+		setInfoMsg('Login e/ou senha incorretos');
+		
 		fetchAttempts();
 		return;
 	};
