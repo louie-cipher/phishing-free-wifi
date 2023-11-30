@@ -1,7 +1,7 @@
 import routes from '..';
-import { LoginEntry } from 'db/entities/LoginEntry';
-import { consoleLog } from 'utils/log';
-import { validateToken } from 'utils/token';
+import { LoginEntry } from '../../../db/entities/LoginEntry';
+import { consoleLog } from '../../../utils/log';
+import { validateToken } from '../../../utils/token';
 
 routes.delete(`/entries/:id`, validateToken, async (req, res) => {
 	const entryId = parseInt(req.params.id, 10);

@@ -1,6 +1,6 @@
 import routes from '..';
-import { maxLoginAttempts } from 'src/index';
-import { LoginEntry } from 'db/entities/LoginEntry';
+import { maxLoginAttempts } from '../../../index';
+import { LoginEntry } from '../../../db/entities/LoginEntry';
 
 routes.get('/login', async (req, res) => {
 	const ip = req.socket.remoteAddress || req.ip;

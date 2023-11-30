@@ -1,8 +1,8 @@
 import routes from '..';
-import { Admin } from 'db/entities/Admin';
-import  userAgent from 'utils/userAgent';
-import { consoleLog, unauthorizedLog } from 'utils/log';
-import { generateToken } from 'utils/token';
+import { Admin } from '../../../db/entities/Admin';
+import  userAgent from '../../../utils/userAgent';
+import { consoleLog, unauthorizedLog } from '../../../utils/log';
+import { generateToken } from '../../../utils/token';
 
 interface ILoginData {
 	username: string;

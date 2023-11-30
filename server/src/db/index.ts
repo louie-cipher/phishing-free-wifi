@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
-import { consoleLog } from 'utils/log';
+import { consoleLog } from '../utils/log';
+import AdminRepo from './repositories/Admin';
 
 const entities = `${__dirname}/entities/*.{ts,js}`;
 
@@ -9,8 +10,6 @@ export const db = new DataSource({
 	entities: [entities],
 	synchronize: true,
 });
-
-import AdminRepo from './repositories/Admin';
 
 export const initDB = async () => {
 	db.initialize()

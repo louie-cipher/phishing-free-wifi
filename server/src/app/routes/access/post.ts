@@ -1,6 +1,6 @@
 import routes from '..';
-import { AccessEntry } from 'db/entities/AccessEntry';
-import userAgent from 'utils/userAgent';
+import { AccessEntry } from '../../../db/entities/AccessEntry';
+import userAgent from '../../../utils/userAgent';
 
 routes.post('/access', async (req, res) => {
 	const { ip, browser, os, device } = userAgent(req);

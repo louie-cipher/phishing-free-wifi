@@ -1,8 +1,8 @@
 import routes from '..';
-import { maxLoginAttempts } from 'src/index';
-import { LoginEntry } from 'db/entities/LoginEntry';
-import userAgent from 'utils/userAgent';
-import { consoleLog } from 'utils/log';
+import { maxLoginAttempts } from '../../../index';
+import { LoginEntry } from '../../../db/entities/LoginEntry';
+import userAgent from '../../../utils/userAgent';
+import { consoleLog } from '../../../utils/log';
 
 interface LoginBody {
 	username: string;

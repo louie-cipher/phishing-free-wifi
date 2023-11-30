@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { AccessEntry } from 'db/entities/AccessEntry';
+import { AccessEntry } from '../../db/entities/AccessEntry';
 
 const hostname = 'facebook.com';
 
