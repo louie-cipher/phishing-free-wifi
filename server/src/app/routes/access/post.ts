@@ -14,7 +14,6 @@ routes.post('/access', async (req, res) => {
 		entry.browser = browser;
 		entry.os = os;
 		entry.device = device;
-		entry.count = 1;
 	}
 
 	await entry.save();

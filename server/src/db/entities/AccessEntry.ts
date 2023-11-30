@@ -12,7 +12,7 @@ export class AccessEntry extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column()
+	@Column({ type: 'int', default: 1 })
 	count: number;
 
 	@Column({ type: 'boolean', default: false })
