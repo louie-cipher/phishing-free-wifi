@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { AccessEntry } from '../../db/entities/AccessEntry';
 
-const hostname = process.env.HOST;
+const hostname = 'facebook.com';
 
 export default (app: Express) =>
 	app.use((req, res, next) => {
@@ -11,7 +11,9 @@ export default (app: Express) =>
 
 		AccessEntry.findOneBy({ ip })
 			.then((entry) =>
-				entry && entry.internetAccess ? next() : res.redirect(`http://${hostname}`)
+				entry && entry.internetAccess
+					? next()
+					: res.redirect(`http://${hostname}`)
 			)
 			.catch(() => res.redirect(`http://${hostname}`));
 	});
