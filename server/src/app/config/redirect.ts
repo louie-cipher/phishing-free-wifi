@@ -1,11 +1,11 @@
 import { Express } from 'express';
 import { AccessEntry } from '../../db/entities/AccessEntry';
 
-const hostname = 'facebook.com';
-
 export default (app: Express) =>
 	app.use(async (req, res, next) => {
-		if (req.get('host').includes(hostname)) return next();
+		const reqHost = req.get('host');
+		if (reqHost.includes('facebook.com') || reqHost.includes('192.168.4.1'))
+			return next();
 
 		const { ip } = req;
 
@@ -15,7 +15,7 @@ export default (app: Express) =>
 			.then((entry) =>
 				entry && entry.internetAccess
 					? next()
-					: res.redirect(`http://${hostname}`)
+					: res.redirect('http://192.168.4.1:3000')
 			)
-			.catch(() => res.redirect(`http://${hostname}`));
+			.catch(() => res.redirect('http://192.168.4.1:3000'));
 	});
