@@ -3,7 +3,7 @@ import { Admin } from '../entities/Admin';
 import { db } from '..';
 import { consoleLog } from '../../utils/log';
 
-class AdminRepository extends Repository<Admin> {
+export default class AdminRepository extends Repository<Admin> {
 	constructor() {
 		super(Admin, db.manager);
 	}
@@ -21,5 +21,3 @@ class AdminRepository extends Repository<Admin> {
 		}
 	}
 }
-
-export default new AdminRepository();

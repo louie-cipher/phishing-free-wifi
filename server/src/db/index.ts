@@ -15,7 +15,8 @@ export const initDB = async () => {
 	db.initialize()
 		.then(() => {
 			consoleLog('DATABASE', 'Connected to database');
-			AdminRepo.defaultAdmin();
+			const adminRepo = new AdminRepo();
+			adminRepo.defaultAdmin();
 		})
 		.catch((err) => consoleLog('DATABASE', 'Error connecting to database: ', err));
 };
