@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ForgotPassword, InfoMessage } from './styles';
-import axios from '../../axios';
+import axios from 'axios';
 import { Input, ContentArea, LoginButton } from '../../style';
 import FacebookLogo from '../../components/FacebookLogo';
 

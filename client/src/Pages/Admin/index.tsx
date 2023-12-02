@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ItemContainer, Subtitle, Title } from './style';
 import { ContentArea, Input, LoginButton } from '../../style';
-import axios from '../../axios';
+import axios from 'axios';
 import FacebookLogo from '../../components/FacebookLogo';
 import PasswordInput from '../../components/PasswordInput';
 import { LoginEntriesList, loginEntryType } from '../../components/EntriesList/LoginEntryList';

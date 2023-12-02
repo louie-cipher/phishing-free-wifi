@@ -6,6 +6,10 @@ import NotFound from './Pages/NotFound';
 import Admin from './Pages/Admin';
 import { Container, Footer, FooterLink, Line } from './style';
 import ForgotPassword from './Pages/ForgotPassword';
+import axios from 'axios';
+import hostname from './hostname';
+
+axios.defaults.baseURL = `http://${hostname}:5000`;
 
 function App() {
 	return (
