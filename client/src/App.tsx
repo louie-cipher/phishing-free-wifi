@@ -9,7 +9,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import axios from 'axios';
 import hostname from './hostname';
 
-axios.defaults.baseURL = `http://${hostname}`;
+axios.defaults.baseURL = `http://${hostname}/api`;
 
 function App() {
 	return (
