@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import Home from './Pages/Home';
 import PageTitle from './components/pageTitle';
+import Home from './Pages/Home';
 import NotFound from './Pages/NotFound';
 import Admin from './Pages/Admin';
 import { Container, Footer, FooterLink, Line } from './style';
@@ -9,7 +9,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import axios from 'axios';
 import hostname from './hostname';
 
-axios.defaults.baseURL = `http://${hostname}:5000`;
+axios.defaults.baseURL = `http://${hostname}`;
 
 function App() {
 	return (
