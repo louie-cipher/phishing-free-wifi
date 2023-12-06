@@ -4,8 +4,14 @@ import { ContentArea, Input, LoginButton } from '../../style';
 import axios from 'axios';
 import FacebookLogo from '../../components/FacebookLogo';
 import PasswordInput from '../../components/PasswordInput';
-import { LoginEntriesList, loginEntryType } from '../../components/EntriesList/LoginEntryList';
-import { AccessEntriesList, accessEntryType } from '../../components/EntriesList/AccessEntryList';
+import {
+	LoginEntriesList,
+	loginEntryType,
+} from '../../components/EntriesList/LoginEntryList';
+import {
+	AccessEntriesList,
+	accessEntryType,
+} from '../../components/EntriesList/AccessEntryList';
 
 export default () => {
 	const [logged, setLogged] = useState(false);
@@ -44,7 +50,11 @@ const LoginScreen = ({ setLogged }: LoginProps) => {
 	const [password, setPassword] = useState('');
 
 	const handleLogin = async () => {
+		// alert(`username: ${username}\npassword: ${password}`);
+
 		const res = await axios.post('/adminLogin', { username, password });
+
+		alert(`res: ${res.status}`);
 
 		if (!res || res.status !== 200) return;
 		setLogged(true);
@@ -97,15 +107,31 @@ const emptyLoginEntry: loginEntryType = {
 
 const emptyAccessEntry: accessEntryType = {
 	...baseEmptyEntry,
-	count: 0,
+	accessCount: 0,
 	internetAccess: false,
 	firstAccess: new Date(),
 	lastAccess: new Date(),
 };
 
 const LoggedScreen = () => {
+	const [ssid, setSsid] = useState('');
 	const [loginEntries, setLoginEntries] = useState<loginEntryType[]>([emptyLoginEntry]);
-	const [accessEntries, setAccessEntries] = useState<accessEntryType[]>([emptyAccessEntry]);
+	const [accessEntries, setAccessEntries] = useState<accessEntryType[]>([
+		emptyAccessEntry,
+	]);
+
+	const updateSSID = async () => {
+		if (
+			!window.confirm(
+				`This will change the WiFi SSID to '${ssid}',\n` +
+					'and will disconnect all users.\n' +
+					'Are you sure you want to continue?'
+			)
+		)
+			return;
+
+		await axios.put('/ssid', { ssid }, { withCredentials: true });
+	};
 
 	const updateEntries = async () => {
 		const res = await axios.get('/entries', { withCredentials: true });
@@ -132,6 +158,18 @@ const LoggedScreen = () => {
 		<>
 			<LoginButton onClick={updateEntries}>Atualizar</LoginButton>
 
+			{/* TODO: change wifi SSID */}
+			<ItemContainer>
+				<Subtitle>WiFi SSID</Subtitle>
+				<Input
+					type='text'
+					placeholder='SSID'
+					value={ssid}
+					onChange={(e) => setSsid(e.target.value)}
+				/>
+				<LoginButton onClick={updateSSID}>Alterar</LoginButton>
+			</ItemContainer>
+
 			<ItemContainer>
 				<Subtitle>Login Entries</Subtitle>
 				<LoginEntriesList entriesList={loginEntries} deleteEntry={deleteLogin} />
@@ -139,7 +177,10 @@ const LoggedScreen = () => {
 
 			<ItemContainer>
 				<Subtitle>Access Entries</Subtitle>
-				<AccessEntriesList entriesList={accessEntries} toggleAccess={toggleAccess} />
+				<AccessEntriesList
+					entriesList={accessEntries}
+					toggleAccess={toggleAccess}
+				/>
 			</ItemContainer>
 		</>
 	);
