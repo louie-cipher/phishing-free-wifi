@@ -53,13 +53,12 @@ export const LoginEntriesList = ({ entriesList, deleteEntry }: EntriesListProps)
 	);
 };
 
-const d = (num: number) => (num < 10 ? `0${num}` : `${num}`);
-
-const DateToString = (date: Date) => {
-	// localTimezoneOffset = -3h
-	const localDate = new Date(date.getTime() - 10800000);
-	return (
-		`${d(localDate.getDate())}/${d(localDate.getMonth() + 1)}/${localDate.getFullYear()}` +
-		`${d(localDate.getHours())}:${d(localDate.getMinutes())}:${d(localDate.getSeconds())}`
-	);
-};
+const DateToString = (date: Date) =>
+	date.toLocaleDateString('pt-BR', {
+		timeZone: 'America/Sao_Paulo',
+		day: '2-digit',
+		month: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+	});
