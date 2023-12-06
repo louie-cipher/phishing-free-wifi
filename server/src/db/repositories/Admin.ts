@@ -13,8 +13,8 @@ export default class AdminRepository extends Repository<Admin> {
 
 		if (hasEntry === 0) {
 			const admin = new Admin();
-			admin.username = 'password';
-			admin.password = 'username';
+			admin.username = process.env.ADMIN_USERNAME || 'admin';
+			admin.password = process.env.ADMIN_PASSWORD || 'admin';
 			await this.save(admin);
 
 			consoleLog('DATABASE', 'Created default admin user');
