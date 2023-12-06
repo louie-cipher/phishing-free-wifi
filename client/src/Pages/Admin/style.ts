@@ -14,7 +14,6 @@ export const ItemContainer = styled.div`
 	justify-content: center;
 	border-radius: 8px;
 	border: 2px solid #d8dbdf;
-	width: 100%;
 	margin: 12px 0;
 `;
 

@@ -19,14 +19,13 @@ export const Table = styled.table`
 export const TableHead = styled.thead`
 	background: #1877f2;
 	color: white;
-	padding: 12px;
 	text-align: left;
-	border-bottom: 1px solid #d8dbdf;
 `;
 
 export const TableHeadCell = styled.th`
-	padding: 12px;
+	padding: 5px;
 	text-align: center;
+	border-left: 2px solid #d8dbdf;
 `;
 
 export const TableBody = styled.tbody`

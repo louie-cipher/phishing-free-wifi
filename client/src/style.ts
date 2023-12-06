@@ -5,7 +5,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	height: 100vh;
-	width: 100vw;
+	/* width: 100%; */
 	color: white;
 	font-size: calc(10px + 2vmin);
 	text-align: center;
@@ -17,7 +17,7 @@ export const ContentArea = styled.div`
 	align-items: center;
 	justify-content: center;
 	max-width: 400px;
-	width: 100%;
+	width: 90%;
 `;
 
 export const Input = styled.input`
@@ -52,7 +52,7 @@ export const LoginButton = styled.button`
 `;
 
 export const Line = styled.div`
-	width: 400px;
+	width: 100%;
 	border-top: 1px solid #d8dbdf;
 	display: flex;
 	align-items: center;

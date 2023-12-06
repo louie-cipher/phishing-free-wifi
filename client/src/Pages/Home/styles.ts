@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InfoMessage = styled.div`
 	display: block;
 	box-sizing: content-box;
-	width: 100%;
+	width: 100vw;
 	font-size: 14px;
 	padding: 8px 0;
 	background: #fa3e3e;
