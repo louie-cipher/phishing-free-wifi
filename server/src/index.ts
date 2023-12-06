@@ -7,9 +7,13 @@ export const maxLoginAttempts = 5;
 
 config({ path: '../.env' });
 
-const port = process.env.PORT || 5000;
+export const host = process.env.HOST || 'localhost';
+export const port = process.env.PORT || 5000;
+export const frontendHost = process.env.FRONTEND_HOST || host;
+export const frontendPort = process.env.FRONTEND_PORT || 3000;
+
 const server = app.listen(port, () =>
-	consoleLog('SERVER', `Server running at http://localhost:${port}`)
+	consoleLog('SERVER', `Server running at http://${host}:${port}`)
 );
 
 initDB();
