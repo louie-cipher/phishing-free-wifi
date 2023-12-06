@@ -7,7 +7,7 @@ routes.post('/access', async (req, res) => {
 
 	let entry = await AccessEntry.findOneBy({ ip });
 
-	if (entry) entry.count++;
+	if (entry) entry.accessCount++;
 	else {
 		entry = new AccessEntry();
 		entry.ip = ip;

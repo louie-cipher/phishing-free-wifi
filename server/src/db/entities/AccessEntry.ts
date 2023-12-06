@@ -13,7 +13,7 @@ export class AccessEntry extends BaseEntity {
 	id: number;
 
 	@Column({ type: 'int', default: 1 })
-	count: number;
+	accessCount: number;
 
 	@Column({ type: 'boolean', default: false })
 	internetAccess: boolean;

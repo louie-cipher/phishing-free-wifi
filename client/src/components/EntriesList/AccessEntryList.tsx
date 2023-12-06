@@ -14,7 +14,7 @@ export type accessEntryType = {
 	internetAccess: boolean;
 	firstAccess: Date;
 	lastAccess: Date;
-	count: number;
+	accessCount: number;
 	device: string;
 	os: string;
 	browser: string;
@@ -25,7 +25,10 @@ interface AccessEntriesListProps {
 	toggleAccess: (id: number) => void;
 }
 
-export const AccessEntriesList = ({ entriesList, toggleAccess }: AccessEntriesListProps) => {
+export const AccessEntriesList = ({
+	entriesList,
+	toggleAccess,
+}: AccessEntriesListProps) => {
 	return (
 		<Table>
 			<TableHead>
@@ -64,13 +67,12 @@ const TableRowMap = ({ entry, toggleAccess }: TableRowMapProps) => (
 	</>
 );
 
-const d = (num: number) => (num < 10 ? `0${num}` : `${num}`);
-
-const DateToString = (date: Date) => {
-	// localTimezoneOffset = -3h
-	const localDate = new Date(date.getTime() - 10800000);
-	return (
-		`${d(localDate.getDate())}/${d(localDate.getMonth() + 1)}/${localDate.getFullYear()}` +
-		`${d(localDate.getHours())}:${d(localDate.getMinutes())}:${d(localDate.getSeconds())}`
-	);
-};
+const DateToString = (date: Date) =>
+	date.toLocaleDateString('pt-BR', {
+		timeZone: 'America/Sao_Paulo',
+		day: '2-digit',
+		month: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+	});
