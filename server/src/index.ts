@@ -8,9 +8,9 @@ export const maxLoginAttempts = 5;
 config({ path: '../.env' });
 
 export const host = process.env.HOST || 'localhost';
-export const port = process.env.PORT || 5000;
-export const frontendHost = process.env.FRONTEND_HOST || host;
-export const frontendPort = process.env.FRONTEND_PORT || 3000;
+export const port = parseInt(process.env.PORT || '5000', 10);
+export const frontendHost = process.env.VITE_HOST || host;
+export const frontendPort = parseInt(process.env.VITE_PORT || '80', 10);
 
 const server = app.listen(port, () =>
 	consoleLog('SERVER', `Server running at http://${host}:${port}`)
