@@ -14,6 +14,7 @@ export const db = new DataSource({
 export const initDB = async () => {
 	db.initialize()
 		.then(() => {
+			
 			consoleLog('DATABASE', 'Connected to database');
 			const adminRepo = new AdminRepo();
 			adminRepo.defaultAdmin();
