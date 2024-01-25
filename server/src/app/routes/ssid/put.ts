@@ -10,6 +10,9 @@ routes.put('/ssid', validateToken, async (req, res) => {
 	if (!newSSID) return res.status(400).json({ error: 'Missing new SSID' });
 	if (!validateSSID(newSSID)) return res.status(400).json({ error: 'Invalid SSID' });
 
+	if (process.platform !== 'linux')
+		return res.status(418).send('I cannot brew coffee on this OS');
+
 	const command = `sed -i 's/ssid=.*/ssid=${newSSID}/g' /etc/hostapd/hostapd.conf`;
 
 	exec(command, (err, stdout, stderr) => {
