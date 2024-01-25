@@ -1,6 +1,6 @@
 import routes from '..';
 import { Admin } from '../../../db/entities/Admin';
-import  userAgent from '../../../utils/userAgent';
+import userAgent from '../../../utils/userAgent';
 import { consoleLog, unauthorizedLog } from '../../../utils/log';
 import { generateToken } from '../../../utils/token';
 
@@ -22,5 +22,7 @@ routes.post('/adminLogin', async (req, res) => {
 
 	const token = generateToken({ username, password });
 
-	res.cookie('token', token, { httpOnly: true }).status(200).json({ token });
+	res.cookie('token', token, { httpOnly: true, maxAge: 60 * 5 * 1000 })
+		.status(200)
+		.json({ token });
 });
