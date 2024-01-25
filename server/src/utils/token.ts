@@ -8,7 +8,7 @@ export const generateToken = (user: any) =>
 export const validateToken = (req: Request, res: Response, next: NextFunction) => {
 	const header = req.headers['authorization'];
 	const token = header && header.split(' ')[1];
-	if (!token) return;
+	if (!token) return res.sendStatus(401);
 
 	verify(token, process.env.SESSION_SECRET, (err, payload) => {
 		if (err) {
