@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
 import { ItemContainer, Subtitle, Title } from './style';
-import { ContentArea, Input, LoginButton } from '../../style';
+import { ContentArea, Input, LoginButton } from '@/style.ts';
 import axios from 'axios';
-import FacebookLogo from '../../components/FacebookLogo';
-import PasswordInput from '../../components/PasswordInput';
-import {
-	LoginEntriesList,
-	loginEntryType,
-} from '../../components/EntriesList/LoginEntryList';
+import FacebookLogo from '@components/FacebookLogo';
+import PasswordInput from '@components/PasswordInput';
+import { LoginEntriesList, loginEntryType } from '@components/EntriesList/LoginEntryList';
 import {
 	AccessEntriesList,
 	accessEntryType,
-} from '../../components/EntriesList/AccessEntryList';
+} from '@components/EntriesList/AccessEntryList';
 
 export default () => {
 	const [logged, setLogged] = useState(false);
 
 	const checkLogged = async () => {
-		const token = localStorage.getItem('token');
-		if (!token) return;
+		// const token = localStorage.getItem('token');
+		// if (!token) return;
 
-		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		// axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 		const res = await axios.get('/adminLogin', { withCredentials: true });
 		if (!res || res.status !== 200) return;
 
@@ -50,11 +47,7 @@ const LoginScreen = ({ setLogged }: LoginProps) => {
 	const [password, setPassword] = useState('');
 
 	const handleLogin = async () => {
-		// alert(`username: ${username}\npassword: ${password}`);
-
 		const res = await axios.post('/adminLogin', { username, password });
-
-		alert(`res: ${res.status}`);
 
 		if (!res || res.status !== 200) return;
 		setLogged(true);
@@ -63,7 +56,7 @@ const LoginScreen = ({ setLogged }: LoginProps) => {
 		if (!token) return;
 
 		localStorage.setItem('token', token);
-		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 	};
 
 	const keyDown = (e: React.KeyboardEvent) => e.key === 'Enter' && handleLogin();
@@ -134,7 +127,11 @@ const LoggedScreen = () => {
 	};
 
 	const updateEntries = async () => {
+		// console.log('updateEntries');
 		const res = await axios.get('/entries', { withCredentials: true });
+
+		// console.log('res: ', res);
+
 		if (!res || !res.data) return;
 		setLoginEntries([...(res.data.loginEntries || emptyLoginEntry)]);
 		setAccessEntries([...(res.data.accessEntries || emptyLoginEntry)]);
