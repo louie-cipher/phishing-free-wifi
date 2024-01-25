@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Description, Button, Title } from './styles';
-import { Input, ContentArea } from '../../style';
-import FacebookLogo from '../../components/FacebookLogo';
+import { Input, ContentArea } from '@/style';
+import FacebookLogo from '@components/FacebookLogo';
 
 const isEmail = (email: string) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
 const isPhone = (phone: string) =>
