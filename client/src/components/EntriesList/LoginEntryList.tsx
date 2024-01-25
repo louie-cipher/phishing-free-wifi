@@ -38,7 +38,7 @@ export const LoginEntriesList = ({ entriesList, deleteEntry }: EntriesListProps)
 					<TableRow key={entry.id}>
 						{Object.values(entry).map((value, index) => (
 							<TableCell key={index}>
-								{typeof value === 'object' ? DateToString(value) : value}
+								{index === 3 ? `${DateToString(value)}` : `${value}`}
 							</TableCell>
 						))}
 						<TableCell>
@@ -53,8 +53,8 @@ export const LoginEntriesList = ({ entriesList, deleteEntry }: EntriesListProps)
 	);
 };
 
-const DateToString = (date: Date) =>
-	date.toLocaleDateString('pt-BR', {
+const DateToString = (date: any) =>
+	new Date(date).toLocaleDateString('pt-BR', {
 		timeZone: 'America/Sao_Paulo',
 		day: '2-digit',
 		month: '2-digit',

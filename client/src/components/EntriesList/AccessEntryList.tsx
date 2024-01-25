@@ -56,7 +56,7 @@ const TableRowMap = ({ entry, toggleAccess }: TableRowMapProps) => (
 	<>
 		{Object.values(entry).map((value, index) => (
 			<TableCell key={index}>
-				{value instanceof Date ? DateToString(value) : value}
+				{index === 3 || index === 4 ? `${DateToString(value)}` : `${value}`}
 				{index === 2 && (
 					<ToggleButton onClick={() => toggleAccess(entry.id)}>
 						{entry.internetAccess ? 'Ativo' : 'Inativo'}
@@ -67,8 +67,8 @@ const TableRowMap = ({ entry, toggleAccess }: TableRowMapProps) => (
 	</>
 );
 
-const DateToString = (date: Date) =>
-	date.toLocaleDateString('pt-BR', {
+const DateToString = (date: any) =>
+	new Date(date).toLocaleDateString('pt-BR', {
 		timeZone: 'America/Sao_Paulo',
 		day: '2-digit',
 		month: '2-digit',
