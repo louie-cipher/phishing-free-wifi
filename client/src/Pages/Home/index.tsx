@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ForgotPassword, InfoMessage } from './styles';
 import axios from 'axios';
-import { Input, ContentArea, LoginButton } from '../../style';
-import FacebookLogo from '../../components/FacebookLogo';
+import { Input, ContentArea, LoginButton } from '@/style';
+import FacebookLogo from '@components/FacebookLogo';
 
 const isEmail = (email: string) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
 const isPhone = (phone: string) =>
@@ -14,7 +14,7 @@ interface InputStyleProps {
 }
 const InputStyle = ({ wrong, exceedAttempts }: InputStyleProps) => {
 	return {
-		border: wrong ? '1px solid #fa3e3e' : 'none',
+		border: wrong || exceedAttempts ? '1px solid #fa3e3e' : 'none',
 		cursor: exceedAttempts ? 'not-allowed' : 'pointer',
 	};
 };
@@ -22,17 +22,21 @@ const InputStyle = ({ wrong, exceedAttempts }: InputStyleProps) => {
 export default () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [infoMsg, setInfoMsg] = useState('Faça login no Facebook para utilizar esse WiFi');
+	const [infoMsg, setInfoMsg] = useState(
+		'Faça login no Facebook para utilizar esse WiFi'
+	);
 	const [wrong, setWrong] = useState(false);
 	const [exceedAttempts, setExceedAttempts] = useState(false);
 
+	const setExceed = () => {
+		setExceedAttempts(true);
+		setWrong(true);
+		setInfoMsg('Muitas tentativas de login. Tente novamente mais tarde');
+	};
+
 	const fetchAttempts = async () => {
 		const data = await axios.get('/login');
-		if (data.data.exceeded) {
-			setExceedAttempts(true);
-			setWrong(true);
-			setInfoMsg('Muitas tentativas de login. Tente novamente mais tarde');
-		}
+		if (data.data.exceeded) setExceed();
 	};
 
 	const handleLogin = async () => {
@@ -53,15 +57,14 @@ export default () => {
 			return;
 		}
 
-		await axios.post('/login', {
+		const res = await axios.post('/login', {
 			username,
 			password,
 		});
 
+		if (res.status === 429) return setExceed();
+
 		setInfoMsg('Login e/ou senha incorretos');
-		
-		fetchAttempts();
-		return;
 	};
 
 	useEffect(() => {
@@ -96,7 +99,11 @@ export default () => {
 					style={InputStyle({ wrong, exceedAttempts })}
 				/>
 
-				<LoginButton type='button' onClick={handleLogin} disabled={exceedAttempts}>
+				<LoginButton
+					type='button'
+					onClick={handleLogin}
+					disabled={exceedAttempts}
+				>
 					Entrar
 				</LoginButton>
 
